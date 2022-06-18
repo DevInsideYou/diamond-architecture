@@ -21,7 +21,15 @@ lazy val `diamond-architecture` =
   project
     .in(file("."))
     .settings(commonSettings)
-    .aggregate(domain, `core-headers`, `core-dependency-headers`, core, delivery, persistence, main)
+    .aggregate(
+      domain,
+      `input-headers`,
+      `output-headers`,
+      core,
+      delivery,
+      persistence,
+      main,
+    )
 
 lazy val domain =
   project
@@ -29,35 +37,35 @@ lazy val domain =
     .settings(commonSettings)
     .settings(dependencies)
 
-lazy val `core-headers` =
+lazy val `input-headers` =
   project
-    .in(file("01-core-headers"))
+    .in(file("01-input-headers"))
     .dependsOn(domain % Cctt)
     .settings(commonSettings)
 
-lazy val `core-dependency-headers` =
+lazy val `output-headers` =
   project
-    .in(file("01-core-dependency-headers"))
+    .in(file("01-output-headers"))
     .dependsOn(domain % Cctt)
     .settings(commonSettings)
 
 lazy val core =
   project
     .in(file("02-core"))
-    .dependsOn(`core-headers` % Cctt)
-    .dependsOn(`core-dependency-headers` % Cctt)
+    .dependsOn(`input-headers` % Cctt)
+    .dependsOn(`output-headers` % Cctt)
     .settings(commonSettings)
 
 lazy val delivery =
   project
     .in(file("02-delivery"))
-    .dependsOn(`core-headers` % Cctt)
+    .dependsOn(`input-headers` % Cctt)
     .settings(commonSettings)
 
 lazy val persistence =
   project
     .in(file("02-persistence"))
-    .dependsOn(`core-dependency-headers` % Cctt)
+    .dependsOn(`output-headers` % Cctt)
     .settings(commonSettings)
 
 lazy val main =
