@@ -4,9 +4,13 @@ package usecase1
 
 lazy val make: Controller =
   ControllerImpl.make(
-    Boundary.make(
-      Gate.make(
-        PersistenceImpl.make
+    ControllerImpl
+      .Gate
+      .make(
+        Boundary.make(
+          Gate.make(
+            PersistenceImpl.make
+          )
+        )
       )
-    )
   )
