@@ -21,29 +21,36 @@ lazy val `diamond-architecture` =
   project
     .in(file("."))
     .settings(commonSettings)
-    .aggregate(core, delivery, persistence, main)
+    .aggregate(`core-headers`, core, delivery, persistence, main)
+
+lazy val `core-headers` =
+  project
+    .in(file("01-core-headers"))
+    .settings(commonSettings)
+    .settings(dependencies)
 
 lazy val core =
   project
-    .in(file("01-core"))
+    .in(file("02-core"))
+    .dependsOn(`core-headers` % Cctt)
     .settings(commonSettings)
-    .settings(dependencies)
 
 lazy val delivery =
   project
     .in(file("02-delivery"))
-    .dependsOn(core % Cctt)
+    .dependsOn(`core-headers` % Cctt)
     .settings(commonSettings)
 
 lazy val persistence =
   project
     .in(file("02-persistence"))
-    .dependsOn(core % Cctt)
+    .dependsOn(`core-headers` % Cctt)
     .settings(commonSettings)
 
 lazy val main =
   project
     .in(file("03-main"))
+    .dependsOn(core % Cctt)
     .dependsOn(delivery % Cctt)
     .dependsOn(persistence % Cctt)
     .settings(commonSettings)
