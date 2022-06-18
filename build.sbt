@@ -33,44 +33,44 @@ lazy val `diamond-architecture` =
 
 lazy val domain =
   project
-    .in(file("00-domain"))
+    .in(file("01-domain"))
     .settings(commonSettings)
     .settings(dependencies)
 
 lazy val `input-headers` =
   project
-    .in(file("01-input-headers"))
+    .in(file("02-input-headers"))
     .dependsOn(domain % Cctt)
     .settings(commonSettings)
 
 lazy val `output-headers` =
   project
-    .in(file("01-output-headers"))
+    .in(file("02-output-headers"))
     .dependsOn(domain % Cctt)
     .settings(commonSettings)
 
 lazy val core =
   project
-    .in(file("02-core"))
+    .in(file("03-core"))
     .dependsOn(`input-headers` % Cctt)
     .dependsOn(`output-headers` % Cctt)
     .settings(commonSettings)
 
 lazy val delivery =
   project
-    .in(file("02-delivery"))
+    .in(file("03-delivery"))
     .dependsOn(`input-headers` % Cctt)
     .settings(commonSettings)
 
 lazy val persistence =
   project
-    .in(file("02-persistence"))
+    .in(file("03-persistence"))
     .dependsOn(`output-headers` % Cctt)
     .settings(commonSettings)
 
 lazy val main =
   project
-    .in(file("03-main"))
+    .in(file("04-main"))
     .dependsOn(core % Cctt)
     .dependsOn(delivery % Cctt)
     .dependsOn(persistence % Cctt)
