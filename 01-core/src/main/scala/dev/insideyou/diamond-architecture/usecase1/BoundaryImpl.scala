@@ -10,7 +10,8 @@ object BoundaryImpl:
 
   trait Dependencies extends Persistence
 
-  object Dependencies:
-    def make(persistence: Persistence): Dependencies =
+  def make(persistence: Persistence): Boundary =
+    make {
       new Dependencies:
         export persistence.*
+    }

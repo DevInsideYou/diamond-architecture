@@ -4,15 +4,7 @@ package usecase1
 
 lazy val make: Controller =
   ControllerImpl.make(
-    ControllerImpl
-      .Dependencies
-      .make(
-        BoundaryImpl.make(
-          BoundaryImpl
-            .Dependencies
-            .make(
-              PersistenceImpl.make
-            )
-        )
-      )
+    BoundaryImpl.make(
+      PersistenceImpl.make
+    )
   )

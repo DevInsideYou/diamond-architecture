@@ -15,7 +15,8 @@ object ControllerImpl:
 
   trait Dependencies extends Boundary
 
-  object Dependencies:
-    def make(boundary: Boundary): Dependencies =
+  def make(boundary: Boundary): Controller =
+    make {
       new Dependencies:
         export boundary.*
+    }
