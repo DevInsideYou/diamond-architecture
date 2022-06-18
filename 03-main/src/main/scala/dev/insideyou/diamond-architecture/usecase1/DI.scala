@@ -8,9 +8,11 @@ lazy val make: Controller =
       .Gate
       .make(
         Boundary.make(
-          Gate.make(
-            PersistenceImpl.make
-          )
+          Boundary
+            .Gate
+            .make(
+              PersistenceImpl.make
+            )
         )
       )
   )

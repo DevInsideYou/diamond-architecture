@@ -10,3 +10,10 @@ object Boundary:
     new:
       override def countPicturesOf(topic: String): Result =
         gate.countPicturesOf(topic)
+
+  trait Gate extends Persistence
+
+  object Gate:
+    def make(persistence: Persistence): Gate =
+      new Gate:
+        export persistence.*
