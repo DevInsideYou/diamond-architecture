@@ -3,14 +3,14 @@ package diamond_architecture
 package usecase1
 
 object BoundaryImpl:
-  def make(gate: Gate): Boundary =
+  def make(dependencies: Dependencies): Boundary =
     new:
       override def countPicturesOf(topic: String): Result =
-        gate.countPicturesOf(topic)
+        dependencies.countPicturesOf(topic)
 
-  trait Gate extends Persistence
+  trait Dependencies extends Persistence
 
-  object Gate:
-    def make(persistence: Persistence): Gate =
-      new Gate:
+  object Dependencies:
+    def make(persistence: Persistence): Dependencies =
+      new Dependencies:
         export persistence.*

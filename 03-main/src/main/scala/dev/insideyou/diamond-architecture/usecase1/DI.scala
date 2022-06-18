@@ -5,11 +5,11 @@ package usecase1
 lazy val make: Controller =
   ControllerImpl.make(
     ControllerImpl
-      .Gate
+      .Dependencies
       .make(
         BoundaryImpl.make(
           BoundaryImpl
-            .Gate
+            .Dependencies
             .make(
               PersistenceImpl.make
             )

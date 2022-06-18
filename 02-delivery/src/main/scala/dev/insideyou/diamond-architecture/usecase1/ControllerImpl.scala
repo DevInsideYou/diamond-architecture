@@ -3,19 +3,19 @@ package diamond_architecture
 package usecase1
 
 object ControllerImpl:
-  def make(gate: Gate): Controller =
+  def make(dependencies: Dependencies): Controller =
     new:
       override def run(): Unit =
         println("─" * 100)
 
-        println(gate.countPicturesOf("cats"))
-        println(gate.countPicturesOf("dogs"))
+        println(dependencies.countPicturesOf("cats"))
+        println(dependencies.countPicturesOf("dogs"))
 
         println("─" * 100)
 
-  trait Gate extends Boundary
+  trait Dependencies extends Boundary
 
-  object Gate:
-    def make(boundary: Boundary): Gate =
-      new Gate:
+  object Dependencies:
+    def make(boundary: Boundary): Dependencies =
+      new Dependencies:
         export boundary.*
